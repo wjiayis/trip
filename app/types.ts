@@ -100,3 +100,25 @@ export const DEFAULT_EMOJIS: Record<LocationType, string> = {
   activity: '🎯',
   transport: '🚗'
 }
+
+// Point of Interest from Places API
+export interface POI {
+  id: string
+  name: string
+  coordinates: Coordinates
+  address?: string
+  rating?: number
+  detourSeconds?: number
+}
+
+// POI search category
+export type POICategory = 'grocery' | 'gas_station' | 'restaurant' | 'cafe' | 'pharmacy'
+
+// POI category configuration
+export const POI_CONFIG: Record<POICategory, { type: string; emoji: string; label: string }> = {
+  grocery: { type: 'grocery_or_supermarket', emoji: '🛒', label: 'Grocery' },
+  gas_station: { type: 'gas_station', emoji: '⛽', label: 'Gas Station' },
+  restaurant: { type: 'restaurant', emoji: '🍽️', label: 'Restaurant' },
+  cafe: { type: 'cafe', emoji: '☕', label: 'Cafe' },
+  pharmacy: { type: 'pharmacy', emoji: '💊', label: 'Pharmacy' }
+}

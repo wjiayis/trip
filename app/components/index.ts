@@ -1,3 +1,5 @@
 export { TripMap } from './TripMap'
 export { RouteRenderer } from './RouteRenderer'
+export { POISearch } from './POISearch'
+export { MapControls } from './MapControls'
 export * from './markers'

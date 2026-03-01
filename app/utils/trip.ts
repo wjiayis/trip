@@ -54,7 +54,7 @@ export function calculateTripCenter(trip: Trip): Coordinates {
  */
 export function getItinerary(trip: Trip): Location[] {
   const sortedActivities = getSortedActivities(trip)
-  const locationIds = [...new Set(sortedActivities.map(a => a.locationId))]
+  const locationIds = Array.from(new Set(sortedActivities.map(a => a.locationId)))
   return locationIds
     .map(id => getLocationById(trip, id))
     .filter((loc): loc is Location => loc !== undefined)

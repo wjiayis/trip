@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps'
 import { Route, Location, DEFAULT_ROUTE_STYLES, TravelMode } from '../types'
 
 interface RouteRendererProps {
   route: Route
   locations: Location[]
+  onRouteReady?: (result: google.maps.DirectionsResult) => void
 }
 
 function getTravelMode(mode: TravelMode): google.maps.TravelMode {
@@ -22,12 +23,20 @@ function getTravelMode(mode: TravelMode): google.maps.TravelMode {
 /**
  * Renders a route between two locations on the map
  */
-export function RouteRenderer({ route, locations }: RouteRendererProps) {
+export function RouteRenderer({ route, locations, onRouteReady }: RouteRendererProps) {
   const map = useMap()
   const routesLibrary = useMapsLibrary('routes')
+  const rendererRef = useRef<google.maps.DirectionsRenderer | null>(null)
+  const onRouteReadyRef = useRef(onRouteReady)
+
+  // Keep the callback ref up to date without triggering re-renders
+  onRouteReadyRef.current = onRouteReady
 
   useEffect(() => {
     if (!map || !routesLibrary) return
+
+    // Skip if already rendered for this route
+    if (rendererRef.current) return
 
     const origin = locations.find(l => l.id === route.originId)
     const destination = locations.find(l => l.id === route.destinationId)
@@ -50,6 +59,7 @@ export function RouteRenderer({ route, locations }: RouteRendererProps) {
         strokeOpacity: style.strokeOpacity ?? 1
       }
     })
+    rendererRef.current = directionsRenderer
 
     directionsService
       .route({
@@ -59,13 +69,17 @@ export function RouteRenderer({ route, locations }: RouteRendererProps) {
       })
       .then(response => {
         directionsRenderer.setDirections(response)
+        onRouteReadyRef.current?.(response)
       })
       .catch(err => {
         console.error('Directions request failed:', err)
       })
 
-    return () => directionsRenderer.setMap(null)
-  }, [map, routesLibrary, route, locations])
+    return () => {
+      directionsRenderer.setMap(null)
+      rendererRef.current = null
+    }
+  }, [map, routesLibrary, route.id, route.originId, route.destinationId, route.travelMode, route.style, locations])
 
   return null
 }
