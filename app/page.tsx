@@ -51,6 +51,9 @@ export default function Home() {
           defaultZoom={10}
           style={{ width: '100%', height: '100%' }}
           mapId="trip-map"
+          disableDefaultUI={true}
+          mapTypeControl={true}
+          mapTypeControlOptions={{ style: 1, mapTypeIds: ['roadmap', 'satellite'] }}
         >
           <AdvancedMarker position={riisitunturi} title="Riisitunturi National Park">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
