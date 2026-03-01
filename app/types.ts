@@ -14,12 +14,17 @@ export type MarkerStyle = 'badge' | 'image' | 'pin'
 export interface Location {
   id: string
   name: string
-  coordinates: Coordinates
+  query: string // Search query for geocoding (e.g., "Leknes Airport, Norway")
   type: LocationType
   emoji?: string
   image?: string
   description?: string
   markerStyle: MarkerStyle
+}
+
+// Resolved location with coordinates (after geocoding)
+export interface ResolvedLocation extends Location {
+  coordinates: Coordinates
 }
 
 // Travel modes for routes
@@ -59,7 +64,7 @@ export interface Trip {
   locations: Location[]
   routes: Route[]
   activities: Activity[]
-  defaultCenter?: Coordinates
+  defaultCenter?: string // Search query for center (e.g., "Lofoten, Norway")
   defaultZoom?: number
 }
 

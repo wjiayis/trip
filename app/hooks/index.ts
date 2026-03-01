@@ -1,0 +1,1 @@
+export { useGeocodedLocations } from './useGeocodedLocations'

@@ -2,11 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps'
-import { Route, Location, DEFAULT_ROUTE_STYLES, TravelMode } from '../types'
+import { Route, ResolvedLocation, DEFAULT_ROUTE_STYLES, TravelMode } from '../types'
 
 interface RouteRendererProps {
   route: Route
-  locations: Location[]
+  locations: ResolvedLocation[]
   onRouteReady?: (result: google.maps.DirectionsResult) => void
 }
 

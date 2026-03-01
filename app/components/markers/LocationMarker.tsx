@@ -1,11 +1,11 @@
 'use client'
 
-import { Location } from '../../types'
+import { ResolvedLocation } from '../../types'
 import { BadgeMarker } from './BadgeMarker'
 import { ImageMarker } from './ImageMarker'
 
 interface LocationMarkerProps {
-  location: Location
+  location: ResolvedLocation
 }
 
 /**

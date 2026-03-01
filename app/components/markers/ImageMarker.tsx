@@ -1,10 +1,10 @@
 'use client'
 
 import { AdvancedMarker } from '@vis.gl/react-google-maps'
-import { Location, MARKER_STYLES } from '../../types'
+import { ResolvedLocation, MARKER_STYLES } from '../../types'
 
 interface ImageMarkerProps {
-  location: Location
+  location: ResolvedLocation
 }
 
 export function ImageMarker({ location }: ImageMarkerProps) {

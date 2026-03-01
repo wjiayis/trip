@@ -5,13 +5,13 @@ export const lofotenTrip: Trip = {
   id: 'lofoten-2024',
   name: 'Lofoten Islands Adventure',
   description: 'Exploring the stunning Lofoten archipelago in Northern Norway',
-  defaultCenter: { lat: 68.1525, lng: 13.6094 },
+  defaultCenter: 'Leknes, Lofoten, Norway',
   defaultZoom: 10,
   locations: [
     {
       id: 'leknes-airport',
       name: 'Leknes Airport',
-      coordinates: { lat: 68.1525, lng: 13.6094 },
+      query: 'Leknes Airport, Norway',
       type: 'airport',
       emoji: '✈️',
       markerStyle: 'badge',
@@ -20,7 +20,7 @@ export const lofotenTrip: Trip = {
     {
       id: 'eliassen-rorbuer',
       name: 'Eliassen Rorbuer',
-      coordinates: { lat: 68.0294, lng: 13.1011 },
+      query: 'Eliassen Rorbuer, Hamnøy, Norway',
       type: 'accommodation',
       emoji: '🏠',
       markerStyle: 'badge',
@@ -60,13 +60,13 @@ export const riisitunturiTrip: Trip = {
   id: 'riisitunturi-2024',
   name: 'Riisitunturi National Park',
   description: 'Winter wonderland in Finnish Lapland',
-  defaultCenter: { lat: 66.2567, lng: 28.5167 },
+  defaultCenter: 'Riisitunturi National Park, Finland',
   defaultZoom: 12,
   locations: [
     {
       id: 'riisitunturi-park',
       name: 'Riisitunturi National Park',
-      coordinates: { lat: 66.2567, lng: 28.5167 },
+      query: 'Riisitunturi National Park, Finland',
       type: 'attraction',
       image: '/riisitunturi.jpg',
       markerStyle: 'image',
@@ -91,13 +91,13 @@ export const combinedNordicTrip: Trip = {
   id: 'nordic-adventure-2024',
   name: 'Nordic Adventure',
   description: 'Exploring Norway and Finland',
-  defaultCenter: { lat: 68.1525, lng: 13.6094 },
+  defaultCenter: 'Leknes, Lofoten, Norway',
   defaultZoom: 10,
   locations: [
     {
       id: 'riisitunturi-park',
       name: 'Riisitunturi National Park',
-      coordinates: { lat: 66.2567, lng: 28.5167 },
+      query: 'Riisitunturi National Park, Finland',
       type: 'attraction',
       image: '/riisitunturi.jpg',
       markerStyle: 'image',
@@ -106,7 +106,7 @@ export const combinedNordicTrip: Trip = {
     {
       id: 'leknes-airport',
       name: 'Leknes Airport',
-      coordinates: { lat: 68.1525, lng: 13.6094 },
+      query: 'Leknes Airport, Norway',
       type: 'airport',
       emoji: '✈️',
       markerStyle: 'badge',
@@ -115,7 +115,7 @@ export const combinedNordicTrip: Trip = {
     {
       id: 'eliassen-rorbuer',
       name: 'Eliassen Rorbuer',
-      coordinates: { lat: 68.0294, lng: 13.1011 },
+      query: 'Eliassen Rorbuer, Hamnøy, Norway',
       type: 'accommodation',
       emoji: '🏠',
       markerStyle: 'badge',

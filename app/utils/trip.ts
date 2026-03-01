@@ -1,10 +1,20 @@
-import { Trip, Location, Activity, Route, Coordinates } from '../types'
+import { Trip, Location, Activity, Route, Coordinates, ResolvedLocation } from '../types'
 
 /**
  * Find a location in a trip by its ID
  */
 export function getLocationById(trip: Trip, locationId: string): Location | undefined {
   return trip.locations.find(l => l.id === locationId)
+}
+
+/**
+ * Find a resolved location by its ID
+ */
+export function getResolvedLocationById(
+  locations: ResolvedLocation[],
+  locationId: string
+): ResolvedLocation | undefined {
+  return locations.find(l => l.id === locationId)
 }
 
 /**
@@ -29,13 +39,12 @@ export function getRoutesForLocation(trip: Trip, locationId: string): Route[] {
 }
 
 /**
- * Calculate the center point of all locations in a trip
+ * Calculate the center point of all resolved locations
  */
-export function calculateTripCenter(trip: Trip): Coordinates {
-  if (trip.defaultCenter) return trip.defaultCenter
-  if (trip.locations.length === 0) return { lat: 0, lng: 0 }
+export function calculateCenter(locations: ResolvedLocation[]): Coordinates {
+  if (locations.length === 0) return { lat: 0, lng: 0 }
 
-  const sum = trip.locations.reduce(
+  const sum = locations.reduce(
     (acc, loc) => ({
       lat: acc.lat + loc.coordinates.lat,
       lng: acc.lng + loc.coordinates.lng
@@ -44,8 +53,8 @@ export function calculateTripCenter(trip: Trip): Coordinates {
   )
 
   return {
-    lat: sum.lat / trip.locations.length,
-    lng: sum.lng / trip.locations.length
+    lat: sum.lat / locations.length,
+    lng: sum.lng / locations.length
   }
 }
 

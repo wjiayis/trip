@@ -1,10 +1,10 @@
 'use client'
 
 import { AdvancedMarker } from '@vis.gl/react-google-maps'
-import { Location, MARKER_STYLES, DEFAULT_EMOJIS } from '../../types'
+import { ResolvedLocation, MARKER_STYLES, DEFAULT_EMOJIS } from '../../types'
 
 interface BadgeMarkerProps {
-  location: Location
+  location: ResolvedLocation
 }
 
 export function BadgeMarker({ location }: BadgeMarkerProps) {
