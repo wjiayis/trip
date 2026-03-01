@@ -8,25 +8,33 @@ interface MapControlsProps {
   hasRoutes: boolean
 }
 
+// POI categories to show in the control bar
+const POI_BUTTONS: { category: POICategory; label: string }[] = [
+  { category: 'grocery', label: 'Groceries' },
+  { category: 'gas_station', label: 'Petrol' }
+]
+
 const buttonStyle: React.CSSProperties = {
   background: 'white',
-  border: 'none',
-  padding: '10px 14px',
-  borderRadius: 8,
-  boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+  border: '2px solid transparent',
+  padding: '8px 14px',
+  borderRadius: 20,
+  boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
   cursor: 'pointer',
   fontSize: 13,
   fontWeight: 500,
   display: 'flex',
   alignItems: 'center',
   gap: 6,
-  transition: 'background 0.2s'
+  transition: 'all 0.2s',
+  whiteSpace: 'nowrap' as const,
+  flexShrink: 0
 }
 
 const activeStyle: React.CSSProperties = {
   ...buttonStyle,
   background: '#e8f5e9',
-  border: '2px solid #4caf50'
+  borderColor: '#4caf50'
 }
 
 export function MapControls({ activePOI, onTogglePOI, hasRoutes }: MapControlsProps) {
@@ -37,26 +45,44 @@ export function MapControls({ activePOI, onTogglePOI, hasRoutes }: MapControlsPr
       position: 'absolute',
       top: 10,
       left: 10,
-      display: 'flex',
-      gap: 8,
-      zIndex: 1
+      right: 10,
+      zIndex: 1,
+      overflowX: 'auto',
+      overflowY: 'hidden',
+      WebkitOverflowScrolling: 'touch',
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none'
     }}>
-      <button
-        style={activePOI === 'grocery' ? activeStyle : buttonStyle}
-        onClick={() => onTogglePOI('grocery')}
-        onMouseOver={e => {
-          if (activePOI !== 'grocery') {
-            e.currentTarget.style.background = '#f5f5f5'
-          }
-        }}
-        onMouseOut={e => {
-          if (activePOI !== 'grocery') {
-            e.currentTarget.style.background = 'white'
-          }
-        }}
-      >
-        {POI_CONFIG.grocery.emoji} Grocery Along Route
-      </button>
+      <div style={{
+        display: 'flex',
+        gap: 8,
+        paddingBottom: 4
+      }}>
+        {POI_BUTTONS.map(({ category, label }) => {
+          const isActive = activePOI === category
+          const config = POI_CONFIG[category]
+
+          return (
+            <button
+              key={category}
+              style={isActive ? activeStyle : buttonStyle}
+              onClick={() => onTogglePOI(category)}
+              onMouseOver={e => {
+                if (!isActive) {
+                  e.currentTarget.style.background = '#f5f5f5'
+                }
+              }}
+              onMouseOut={e => {
+                if (!isActive) {
+                  e.currentTarget.style.background = 'white'
+                }
+              }}
+            >
+              {config.emoji} {label}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }

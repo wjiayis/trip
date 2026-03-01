@@ -100,8 +100,6 @@ function TripMapContent({ trip }: { trip: Trip }) {
         style={{ width: '100%', height: '100%' }}
         mapId="trip-map"
         disableDefaultUI={true}
-        mapTypeControl={true}
-        mapTypeControlOptions={{ style: 1, mapTypeIds: ['roadmap', 'satellite'] }}
       >
         {/* Render all location markers */}
         {locations.map(location => (
